@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+.gameMode {
+
+    text-align: center;
+    color: white;
+}
+
+#modeToggleBtn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 2px solid #ffffff;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#modeToggleBtn:hover {
+    background-color: #555;
+}
+
+#modeToggleBtn.computer-mode {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.gameContainer {
+
+    position: relative;
+    top: 5%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 14vw);
+    grid-template-columns: repeat(3, 14vw);
+
+    color: #ffffff;
+}
+
+.box {
+    font-size: 10vw;
+    border: 3px solid;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    transition: all 0.3s ease;
+    animation: boxEntrance 0.6s ease-out;
+}
+
+.box:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.box.clicked {
+    animation: boxClick 0.4s ease-out;
+}
+
+.br-0 {
+    border-right: 0;
+}
+
+.bl-0 {
+    border-left: 0;
+}
+
+.bt-0 {
+    border-top: 0;
+}
+
+.bb-0 {
+    border-bottom: 0;
+}
+
+.boxtext {
+    color: #ffffff;
+}
+
+/* Game Container Animation */
+@keyframes gameContainerEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+@keyframes boxClick {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Win Animations */
+@keyframes winCelebration {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.1) rotate(2deg);
+    }
+
+    50% {
+        transform: scale(1.2) rotate(0deg);
+    }
+
+    75% {
+        transform: scale(1.1) rotate(-2deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes winnerGlow {
+    0% {
+        color: #ffffff;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        color: #00ff00;
+        text-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6);
+    }
+
+    100% {
+        color: #ffffff;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Text Animations */
+@keyframes textPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes textSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Button Animations */
+@keyframes buttonPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes buttonGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 30px rgba(76, 175, 80, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+}
+
+/* Game Container Animation */
+.gameContainer {
+    animation: gameContainerEntrance 1s ease-out;
+}
+
+/* Applied Animations */
+.win-animation {
+    animation: winCelebration 0.6s ease-in-out 3;
+}
+
+.winner-text {
+    animation: winnerGlow 1s ease-in-out infinite;
+}
+
+.turnInfo {
+    animation: textSlideIn 0.5s ease-out;
+}
+
+#modeToggleBtn {
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+#modeToggleBtn.computer-mode {
+    animation: buttonGlow 2s ease-in-out infinite;
+}
+
+.score {
+    margin-left: 30vw;
+    margin-top: 5vw;
+    display: flex;
+    gap: 10vw;
+    font-size: 20px;
+    width: 100vw;
+    padding: 10px;
+}
+
+#reset {
+
+    padding: 15px;
+}
+
+#reset:hover {
+    background-color: rgb(122, 122, 122);
+    color: #ffffff;
+
+}
+
+.turnInfo {
+    padding: 15px;
+    color: #fff;
+
+
+
+
+}
