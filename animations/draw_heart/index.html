@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Geometric Heart</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; 
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #aaa;
+            font-family: monospace;
+        }
+
+        canvas {
+            
+            filter: drop-shadow(0 0 10px rgba(255, 0, 80, 0.4));
+        }
+
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            pointer-events: none; 
+        }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <p>> Python Turtle Animation_</p>
+</div>
+
+<canvas id="heartCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let animationId;
+    
+    
+    const config = {
+        scale: 20,             // Size of the heart
+        speed: 1,              // lines to draw per frame 
+        color: '#ff3366',      // The color
+        totalPoints: 6000      // Matches the range(6000) from your image
+    };
+
+ 
+    let k = 0; 
+
+    // Resize handler
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+
+        reset();
+    }
+    
+    window.addEventListener('resize', resize);
+
+    function getX(k) {
+        return 15 * Math.pow(Math.sin(k), 3);
+    }
+
+
+    function getY(k) {
+        return 12 * Math.cos(k) - 
+                5 * Math.cos(2 * k) - 
+                2 * Math.cos(3 * k) - 
+                Math.cos(4 * k);
+    }
+
+    // Coordinate mapping (centers 0,0 and flips Y)
+    function mapX(x) { return width / 2 + x * config.scale; }
+    function mapY(y) { return height / 2 - y * config.scale; }
+
+    function reset() {
+        if (animationId) cancelAnimationFrame(animationId);
+        k = 0;
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(0, 0, width, height); // Clear screen
+        loop();
+    }
+
+    function loop() {
+        // Prepare line style
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = config.color;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        for (let s = 0; s < config.speed; s++) {
+            if (k >= config.totalPoints) {
+               
+                return; 
+            }
+
+            ctx.beginPath();
+            
+
+            let x1 = getX(k);
+            let y1 = getY(k);
+            
+
+            k++;
+            
+
+            let x2 = getX(k);
+            let y2 = getY(k);
+
+            // Draw the line segment
+            ctx.moveTo(mapX(x1), mapY(y1));
+            ctx.lineTo(mapX(x2), mapY(y2));
+            ctx.stroke();
+        }
+
+      
+        animationId = requestAnimationFrame(loop);
+    }
+
+
+    resize();
+
+</script>
+
+</body>
+</html>
